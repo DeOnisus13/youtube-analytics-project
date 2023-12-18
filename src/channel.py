@@ -1,9 +1,8 @@
 import json
 import os
-from googleapiclient.discovery import build
 
 from dotenv import load_dotenv
-
+from googleapiclient.discovery import build
 
 load_dotenv()
 
@@ -31,6 +30,30 @@ class Channel:
     # @channel_id.setter
     # def channel_id(self, channel_id):
     #     self.__channel_id = channel_id
+
+    def __str__(self):
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        return int(self.subscribers) + int(other.subscribers)
+
+    def __sub__(self, other):
+        return int(self.subscribers) - int(other.subscribers)
+
+    def __lt__(self, other):
+        return self.subscribers < other.subscribers
+
+    def __le__(self, other):
+        return self.subscribers <= other.subscribers
+
+    def __gt__(self, other):
+        return self.subscribers > other.subscribers
+
+    def __ge__(self, other):
+        return self.subscribers >= other.subscribers
+
+    def __eq__(self, other):
+        return self.subscribers == other.subscribers
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
